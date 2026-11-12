@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>グループワーク得意分野診断</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- スタート画面 -->
+    <section id="start-screen" class="card active">
+      <div class="badge">全11問・約1〜2分</div>
+      <h1>グループワーク<br>得意分野診断</h1>
+      <p class="lead">
+        自分の得意なスタイルと「今回挑戦してみたい役割」を掛け合わせて、チームでの最適な立ち回り方を提案します！
+      </p>
+      <div class="type-preview">
+        <span>💡 アイデア型</span>
+        <span>🔍 リサーチ型</span>
+        <span>🧩 ロジック型</span>
+        <span>🧭 リーダー型</span>
+        <span>🎨 クリエイター型</span>
+        <span>🎤 プレゼン型</span>
+      </div>
+      <button id="start-btn" class="primary-btn">診断をスタートする</button>
+    </section>
+
+    <!-- 質問画面（Q1〜Q10） -->
+    <section id="quiz-screen" class="card">
+      <div class="progress-wrapper">
+        <div class="progress-info">
+          <span id="question-number">Q1 / 11</span>
+          <span id="progress-percent">9%</span>
+        </div>
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <h2 id="question-text" class="question-text">質問文がここに入ります</h2>
+
+      <div id="options-container" class="options-container">
+        <!-- 選択肢ボタンがJSで生成されます -->
+      </div>
+
+      <button id="back-btn" class="text-btn" style="display: none;">← 前の質問に戻る</button>
+    </section>
+
+    <!-- 最後の質問画面（Q11：複数選択チェックボックス） -->
+    <section id="q11-screen" class="card">
+      <div class="progress-wrapper">
+        <div class="progress-info">
+          <span>Q11 / 11（最後の質問）</span>
+          <span>100%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 100%;"></div>
+        </div>
+      </div>
+
+      <h2 class="question-text">Q11. 今回のグループワークで、あなたが挑戦してみたい役割は？</h2>
+      <p class="q11-note">
+        診断結果に関係なく、自分が「やってみたい！」と思う役割を選んでください。<span class="multi-badge">※複数選択可</span>
+      </p>
+
+      <div id="q11-options" class="checkbox-list">
+        <!-- JSでチェックボックスを生成 -->
+      </div>
+
+      <p id="q11-error" class="error-msg" style="display: none;">※1つ以上選択してください</p>
+
+      <button id="submit-btn" class="primary-btn">診断結果を見る</button>
+      <button id="q11-back-btn" class="text-btn">← Q10に戻る</button>
+    </section>
+
+    <!-- 結果画面 -->
+    <section id="result-screen" class="card">
+      <div class="result-header">
+        <p class="result-subtitle">あなたのグループワーク診断結果</p>
+        <div id="result-icon" class="result-icon">🧩</div>
+        <h2 id="result-main-title" class="result-main-title">あなたはロジック型！</h2>
+        <div id="result-subtype-badge" class="subtype-badge">サブタイプ：リサーチ型</div>
+        <p id="result-catch" class="result-catch">あなたはバラバラな意見を一つにする整理の達人！</p>
+      </div>
+
+      <div class="result-body">
+        <p id="result-desc" class="result-desc"></p>
+
+        <!-- おすすめの役割 ＆ 挑戦したい役割 -->
+        <div class="roles-grid">
+          <div class="info-box role-box">
+            <h3>✨ おすすめの役割（得意）</h3>
+            <ul id="result-roles" class="bullet-list"></ul>
+          </div>
+
+          <div class="info-box challenge-box">
+            <h3>🔥 あなたが挑戦したい役割</h3>
+            <ul id="result-challenges" class="bullet-list"></ul>
+          </div>
+        </div>
+
+        <!-- AIからの役割提案 -->
+        <div class="ai-proposal-box">
+          <div class="ai-proposal-header">
+            <span class="ai-icon">🤖</span>
+            <h3>AIからの役割提案</h3>
+          </div>
+          <p id="ai-proposal-text" class="ai-proposal-text"></p>
+        </div>
+
+        <!-- 苦手になりやすいこと・成長のヒント -->
+        <div class="info-box weak-box">
+          <h3>⚠️ 苦手になりやすいこと</h3>
+          <p id="result-weak"></p>
+        </div>
+
+        <div class="info-box hint-box">
+          <h3>🌱 成長のヒント</h3>
+          <p id="result-hint"></p>
+        </div>
+
+        <!-- スコアバランス -->
+        <div class="score-chart-box">
+          <h3>📊 あなたの6タイプバランス</h3>
+          <div id="score-bars" class="score-bars"></div>
+        </div>
+
+        <!-- 診断の目的メッセージ -->
+        <div class="purpose-box">
+          <p>
+            この診断の目的は、得意な役割を一方的に決めることではありません。<br>
+            自分の特徴を知り、メンバーと共有することで、お互いの強みを生かしながら、挑戦したいことにも取り組めるグループワークを目指します。
+          </p>
+        </div>
+      </div>
+
+      <button id="retry-btn" class="primary-btn">もう一度診断する</button>
+    </section>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
